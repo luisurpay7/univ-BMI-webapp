@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>IMC</title>
+		<link rel="stylesheet" href="Styles.css"/>
+		<style>
+			
+		</style>
+</head>
+<body>
+	<center>
+
+	<div id="contenedor0">
+
+	<div class="encabezado1">
+		<h1>Calculadora del IMC para adultos</h1>
+	</div>
+	
+	<div id="contenedor1">
+		<br>
+		<p>El índice de masa corporal (IMC) es un número que se calcula con base en el peso y la estatura de la persona. El IMC es un indicador de la gordura bastante confiable para la mayoría de las personas. El IMC no mide la grasa corporal directamente, pero las investigaciones han mostrado que tiene una correlación con mediciones directas de la grasa corporal, tales como el pesaje bajo el agua y la absorciometría dual de rayos X (DXA, por sus siglas en inglés). El IMC se puede considerar una alternativa para mediciones directas de la grasa corporal. Además, es un método económico y fácil de realizar para detectar categorías de peso que pueden llevar a problemas de salud.</p>
+	</div>
+	
+	<img src="salud4.png" width="700" alt="Italian Trulli">
+	<br><br>
+
+	
+
+	<div id="contenedor2">	
+		<br>
+		<p><b>Altura:</b> Centimetros</p>
+		<input type="text" id="id1" >
+		<p id="prueba1"><b>Peso:</b> Kilogramos</p>
+		<input type="text" id="id2">
+
+		<br><br>
+		<button class="boton" onclick="capturar_inputs()">Calcular</button>
+		<br><br>
+	</div>
+	<br><br>
+	<div id="contenedor3">
+		
+		<div id="resultado">
+			<br>
+			<div class="encabezado2">
+				<h2>Resultados</h2>
+			</div>
+
+			<div id="parrafoResultado">
+				<div id="imcR"> </div>
+				
+				<div id="categ1">Mantener un peso saludable puede reducir el riesgo de enfermedades crónicas asociadas al sobrepeso y la obesidad.</div>
+				<div id="categ2">Las personas que tienen sobrepeso o son obesas tienen un mayor riesgo de afecciones crónicas, tales como hipertensión arterial, diabetes y colesterol alto.</div>
+				<div id="riesgoR"></div>
+				<br>
+			</div>
+			<img src="resul4.png" width="200" alt="Italian Trulli">
+			<br><br>	
+		</div>
+
+	</div>
+
+	<div class="burbujas">
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+    </div>
+
+	</div>
+
+
+
+
+	<script>
+		function capturar_inputs(){
+			var id1=document.getElementById('id1').value;
+			var id2=document.getElementById('id2').value;
+			var tablaIMC = [
+						[33,31,29,27,26,24,23,22,20,19],
+						[36,33,31,29,28,26,24,23,22,21],
+						[38,36,33,31,29,28,26,25,23,22],
+						[40,38,35,33,31,29,28,26,25,24],
+						[43,40,37,35,33,31,29,28,26,25],
+						[45,42,40,37,35,33,31,29,28,26],
+						[48,44,42,39,37,35,33,31,29,28],
+						[50,47,44,41,39,36,34,32,31,29],
+						[52,49,46,43,40,38,36,34,32,30],
+						[55,51,48,45,42,40,38,35,34,32],
+						[57,53,50,47,44,42,39,37,35,33],
+						[59,56,52,49,46,43,41,39,37,35],
+						[62,58,54,51,48,45,42,40,38,36],
+						[64,60,56,53,50,47,44,42,39,37],
+						[67,62,58,55,51,48,46,43,41,39],
+						[69,64,60,57,53,50,47,45,42,40],
+						];
+			var pesos = [70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145];
+			var alturas = [1.45,1.50,1.55,1.60,1.65,1.70,1.75,1.80,1.85,1.91];
+			
+			var peso=id2;
+			var altura=id1/100;
+			var indPeso=-1, indAltura=-1, imc;
+
+			var val, rango=2.5;
+			for(var i=0; i<16; i++){	//Peso
+				val = pesos[i];
+				
+				if(peso>=val-rango && peso<val+rango){
+					indPeso = i;
+					break;
+				}
+			}
+
+			for(var i=0; i<10; i++){	//Altura
+				val = alturas[i];
+				if(i==9) rango = 0.035;
+				else rango = 0.025; 
+				
+				if(altura>=val-rango && altura<val+rango){
+					indAltura = i;
+					break;
+				}
+			}
+
+			var clasificacion="";
+			var riesgo="";
+			if(indAltura!=-1 && indPeso!=-1){
+				imc = tablaIMC[indPeso][indAltura];
+
+				if(imc>=18.5 && imc<25){
+					clasificacion="Normal";
+					riesgo="Promedio";
+				}else if(imc>=25 && imc<30){
+					clasificacion="Sobrepeso";
+					riesgo="Aumentado";
+				}else if(imc>=30 && imc<35){
+					clasificacion="Obesidad grado I";
+					riesgo="Moderado";
+				}else if(imc>=35 && imc<40){
+					clasificacion="Obesidad grado II";
+					riesgo="Severo";
+				}else if(imc>=40){
+					clasificacion="Obesidad grado III";
+					riesgo="Muy severo";
+				}
+				document.getElementById("resultado").style.display = 'block';
+				document.getElementById("imcR").innerHTML = `Su IMC es <b>${imc}</b>, lo que indica que su peso está en la categoría de <b>${clasificacion}</b> para adultos de su misma estatura.`;
+
+				if(clasificacion.localeCompare("Normal")==0){
+					document.getElementById("categ1").style.display = 'block';
+					
+				}else{
+					document.getElementById("categ2").style.display = 'block';
+				}
+				document.getElementById("riesgoR").innerHTML = `Nivel de riesgo: <b>${riesgo}</b>.`;
+			}else{
+				document.getElementById("resultado").style.display = 'block';
+				document.getElementById("parrafoResultado").innerHTML = 'Por favor verifique la exactitud de la información que ha introducido.';
+			}
+			
+			//alert("Respuesta: <b> 5 </b>"+indAltura);
+
+			//document.write("<div class="testbox">fa</div>");
+
+			/*
+			document.write("<br/>IndicePeso: "+indPeso);
+			document.write("<br/>IndiceAltura: "+indAltura);
+			document.write("<br/>IMC:"+imc);
+			document.write("<br/>Clasificacion: "+clasificacion);
+			document.write("<br/>Riesgo: "+riesgo);
+			*/
+		}
+	</script>
+
+	</center>
+</body>
+</html>
