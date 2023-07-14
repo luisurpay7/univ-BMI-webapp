@@ -29,9 +29,9 @@
 
 	<div id="contenedor2">	
 		<br>
-		<p><b>Altura:</b> Centimetros</p>
+		<p><b>Altura:</b> Centimetros (145-191)</p>
 		<input type="text" id="id1" >
-		<p id="prueba1"><b>Peso:</b> Kilogramos</p>
+		<p id="prueba1"><b>Peso:</b> Kilogramos (70-145)</p>
 		<input type="text" id="id2">
 
 		<br><br>
@@ -131,6 +131,8 @@
 
 			var clasificacion="";
 			var riesgo="";
+			console.log(indAltura)
+			console.log(indPeso);
 			if(indAltura!=-1 && indPeso!=-1){
 				imc = tablaIMC[indPeso][indAltura];
 
